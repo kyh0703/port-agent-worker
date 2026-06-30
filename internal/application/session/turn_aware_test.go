@@ -136,6 +136,46 @@ func TestTurnAwareOrchestratorReturnsVADError(t *testing.T) {
 	}
 }
 
+func TestTurnAwareOrchestratorCompletesWhenVADStopsReading(t *testing.T) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+
+	frames := []voice.PCMFrame{
+		mustFrame(t, []byte{1, 2}),
+		mustFrame(t, []byte{3, 4}),
+		mustFrame(t, []byte{5, 6}),
+	}
+	egress := &fakeEgress{}
+	stt := &recordingSTT{
+		finalText:     "hello",
+		releaseFinal:  closedSignal(),
+		finalReleased: make(chan struct{}),
+	}
+
+	orchestrator := NewTurnAwareOrchestrator(
+		&fakeIngress{frames: frames},
+		egress,
+		stt,
+		&fakeLLM{response: voice.AssistantResponse{Text: "hi"}},
+		&fakeTTS{frames: []voice.PCMFrame{mustFrame(t, []byte{7, 8})}},
+		TurnRuntime{
+			VAD:          earlyClosingVAD{},
+			Processor:    turn.NewActivityProcessor(turn.NewController(turn.Config{}, nil)),
+			TickInterval: time.Millisecond,
+		},
+	)
+
+	if err := orchestrator.RunTurn(ctx); err != nil {
+		t.Fatalf("RunTurn() error = %v", err)
+	}
+	if stt.framesSeen != len(frames) {
+		t.Fatalf("stt frames seen = %d, want %d", stt.framesSeen, len(frames))
+	}
+	if !egress.flushed {
+		t.Fatal("expected egress flush")
+	}
+}
+
 var _ ports.SpeechToText = (*recordingSTT)(nil)
 var _ ports.VoiceActivityDetector = (*recordingVAD)(nil)
 var _ TurnDecisionHandler = (*recordingDecisionHandler)(nil)
@@ -176,8 +216,16 @@ type failingVAD struct {
 	err error
 }
 
+type earlyClosingVAD struct{}
+
 func (f failingVAD) DetectSpeech(context.Context, <-chan voice.PCMFrame) (<-chan voice.SpeechActivityEvent, error) {
 	return nil, f.err
+}
+
+func (earlyClosingVAD) DetectSpeech(context.Context, <-chan voice.PCMFrame) (<-chan voice.SpeechActivityEvent, error) {
+	out := make(chan voice.SpeechActivityEvent)
+	close(out)
+	return out, nil
 }
 
 func (f *recordingVAD) DetectSpeech(ctx context.Context, frames <-chan voice.PCMFrame) (<-chan voice.SpeechActivityEvent, error) {
@@ -239,6 +287,12 @@ func (h *recordingDecisionHandler) count() int {
 		count++
 	}
 	return count
+}
+
+func closedSignal() <-chan struct{} {
+	ch := make(chan struct{})
+	close(ch)
+	return ch
 }
 
 func mustSpeechEvent(t *testing.T, kind voice.SpeechActivityKind, at time.Time) voice.SpeechActivityEvent {

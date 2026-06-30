@@ -9,6 +9,9 @@ import (
 
 	"port-agent-worker/internal/adapters/media/pending"
 	"port-agent-worker/internal/adapters/providers"
+	"port-agent-worker/internal/adapters/providers/cartesia"
+	"port-agent-worker/internal/adapters/providers/deepgram"
+	"port-agent-worker/internal/adapters/providers/openrouter"
 	turnadapter "port-agent-worker/internal/adapters/turn"
 	"port-agent-worker/internal/application/session"
 	"port-agent-worker/internal/config"
@@ -21,7 +24,7 @@ func main() {
 	cfg := config.Load()
 	log.Printf("port-agent-worker starting env=%s tts_provider=%s smart_turn_enabled=%t", cfg.Environment, cfg.TTSProvider, cfg.SmartTurnEnabled)
 
-	runtime, err := providers.NewRuntime(cfg)
+	runtime, err := newProviderRuntime(cfg)
 	if err != nil {
 		log.Printf("provider wiring failed: %v", err)
 		os.Exit(1)
@@ -55,6 +58,30 @@ func main() {
 
 	<-ctx.Done()
 	log.Print("port-agent-worker stopped")
+}
+
+func newProviderRuntime(cfg config.Config) (providers.Runtime, error) {
+	return providers.NewRuntime(providers.Config{
+		Deepgram: deepgram.Config{
+			APIKey:         cfg.DeepgramAPIKey,
+			Model:          cfg.DeepgramModel,
+			Language:       cfg.DeepgramLanguage,
+			InterimResults: true,
+			SmartFormat:    true,
+		},
+		OpenRouter: openrouter.Config{
+			APIKey:       cfg.OpenRouterKey,
+			Model:        cfg.OpenRouterModel,
+			SystemPrompt: cfg.SystemPrompt,
+			AppTitle:     "port-agent-worker",
+		},
+		Cartesia: cartesia.Config{
+			APIKey:  cfg.CartesiaAPIKey,
+			ModelID: cfg.CartesiaModelID,
+			VoiceID: cfg.CartesiaVoiceID,
+		},
+		TTSProvider: cfg.TTSProvider,
+	})
 }
 
 func newSessionRunner(cfg config.Config, providerRuntime providers.Runtime) (*session.Runner, bool, error) {

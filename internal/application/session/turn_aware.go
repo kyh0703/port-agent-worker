@@ -11,6 +11,7 @@ import (
 )
 
 const defaultTurnTickInterval = 50 * time.Millisecond
+const audioFanOutBufferSize = 16
 
 type TurnDecisionHandler interface {
 	HandleTurnDecision(ctx context.Context, decision turn.Decision) error
@@ -67,8 +68,8 @@ func (o *TurnAwareOrchestrator) RunTurn(ctx context.Context) error {
 	turnCtx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
-	sttAudio := make(chan voice.PCMFrame)
-	vadAudio := make(chan voice.PCMFrame)
+	sttAudio := make(chan voice.PCMFrame, audioFanOutBufferSize)
+	vadAudio := make(chan voice.PCMFrame, audioFanOutBufferSize)
 	go fanOutPCM(turnCtx, audio, sttAudio, vadAudio)
 
 	transcripts, err := o.stt.Transcribe(turnCtx, sttAudio)
@@ -186,6 +187,8 @@ func fanOutPCM(ctx context.Context, input <-chan voice.PCMFrame, outputs ...chan
 				case <-ctx.Done():
 					return
 				case output <- frame:
+				default:
+					// Drop for a stalled branch; one consumer must not block the live turn.
 				}
 			}
 		}
