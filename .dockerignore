@@ -1,0 +1,11 @@
+.git
+.github
+.worktrees
+bin
+docs
+
+*.log
+*.tmp
+Dockerfile
+README.md
+rails.toml
