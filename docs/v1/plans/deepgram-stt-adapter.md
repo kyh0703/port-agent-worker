@@ -23,7 +23,7 @@ Deepgram Nova-3 streaming STT adapter를 추가해서 PCM frame stream을 transc
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: Deepgram adapter configuration and WebSocket URL construction을 구현한다.
 - Depends on:
   - none
@@ -39,7 +39,7 @@ Deepgram Nova-3 streaming STT adapter를 추가해서 PCM frame stream을 transc
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: Deepgram response parser를 구현하고 final/interim transcript 테스트를 추가한다.
 - Depends on:
   - T1
@@ -53,7 +53,7 @@ Deepgram Nova-3 streaming STT adapter를 추가해서 PCM frame stream을 transc
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: `SpeechToText` 포트 구현체로 WebSocket audio send/receive loop를 연결한다.
 - Depends on:
   - T1
@@ -67,4 +67,3 @@ Deepgram Nova-3 streaming STT adapter를 추가해서 PCM frame stream을 transc
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
