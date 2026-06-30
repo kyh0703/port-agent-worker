@@ -22,7 +22,7 @@ PCM frame을 encoded Opus RTP packet으로 packetize해 Pion output track에 쓰
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: Egress encoder/writer boundary와 config를 만든다.
 - Depends on:
   - none
@@ -38,7 +38,7 @@ PCM frame을 encoded Opus RTP packet으로 packetize해 Pion output track에 쓰
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: RTP packetization과 fake 기반 테스트를 구현한다.
 - Depends on:
   - T1
@@ -52,7 +52,7 @@ PCM frame을 encoded Opus RTP packet으로 packetize해 Pion output track에 쓰
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: 전체 검증을 완료한다.
 - Depends on:
   - T1
@@ -65,4 +65,3 @@ PCM frame을 encoded Opus RTP packet으로 packetize해 Pion output track에 쓰
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
