@@ -1,12 +1,12 @@
 # State
 
-current_version: none
+current_version: v2
 
 ## Active
 
-- Version: none
-- Focus: none
-- Current feature: none
+- Version: v2
+- Focus: voice pipeline stability and hexagonal wiring cleanup
+- Current feature: pipeline-stability-hex-wiring
 
 ## Completed Versions
 
