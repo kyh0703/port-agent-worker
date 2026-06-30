@@ -1,0 +1,20 @@
+# Railway-compatible deployment config.
+# If the platform expects Railway's default filename, configure the service
+# custom config path to `/rails.toml` or rename this file to `railway.toml`.
+
+[build]
+builder = "RAILPACK"
+buildCommand = "go build -o bin/port-agent-worker ./cmd/worker"
+watchPatterns = [
+  "cmd/**",
+  "internal/**",
+  "go.mod",
+  "go.sum",
+  "Makefile",
+  "rails.toml"
+]
+
+[deploy]
+startCommand = "./bin/port-agent-worker"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
