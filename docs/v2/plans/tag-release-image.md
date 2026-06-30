@@ -22,7 +22,7 @@ Add a tag-triggered GitHub Actions workflow that builds the worker container ima
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: Add a production Dockerfile and docker ignore rules for the Go worker.
 - Depends on:
   - none
@@ -41,7 +41,7 @@ Add a tag-triggered GitHub Actions workflow that builds the worker container ima
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: Add GitHub Actions workflow for tag-triggered GHCR image publishing.
 - Depends on:
   - T1
@@ -56,7 +56,7 @@ Add a tag-triggered GitHub Actions workflow that builds the worker container ima
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: Run repository verification for the release image workflow slice.
 - Depends on:
   - T1
