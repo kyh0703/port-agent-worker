@@ -13,7 +13,8 @@ type Config struct {
 }
 
 type Decision struct {
-	BargeIn bool
+	BargeIn  bool
+	Endpoint bool
 }
 
 type Snapshot struct {
