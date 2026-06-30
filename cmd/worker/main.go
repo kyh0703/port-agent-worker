@@ -9,6 +9,7 @@ import (
 
 	"port-agent-worker/internal/adapters/media/pending"
 	"port-agent-worker/internal/adapters/providers"
+	turnadapter "port-agent-worker/internal/adapters/turn"
 	"port-agent-worker/internal/application/session"
 	"port-agent-worker/internal/config"
 )
@@ -31,17 +32,10 @@ func main() {
 	}
 
 	log.Print("provider wiring ready")
-	runner := session.NewRunnerFromRuntime(
-		session.ProviderRuntime{
-			STT: runtime.STT,
-			LLM: runtime.LLM,
-			TTS: runtime.TTS,
-		},
-		session.AudioRuntime{
-			Ingress: pending.Ingress{},
-			Egress:  pending.Egress{},
-		},
-	)
+	runner, turnEnabled := newSessionRunner(cfg, runtime)
+	if turnEnabled {
+		log.Print("turn runtime wiring ready")
+	}
 
 	if cfg.RunSession {
 		log.Print("session runner starting")
@@ -57,4 +51,22 @@ func main() {
 
 	<-ctx.Done()
 	log.Print("port-agent-worker stopped")
+}
+
+func newSessionRunner(cfg config.Config, providerRuntime providers.Runtime) (*session.Runner, bool) {
+	providers := session.ProviderRuntime{
+		STT: providerRuntime.STT,
+		LLM: providerRuntime.LLM,
+		TTS: providerRuntime.TTS,
+	}
+	audio := session.AudioRuntime{
+		Ingress: pending.Ingress{},
+		Egress:  pending.Egress{},
+	}
+
+	if cfg.TurnEnabled {
+		return session.NewTurnAwareRunnerFromRuntime(providers, audio, turnadapter.NewRuntime(cfg)), true
+	}
+
+	return session.NewRunnerFromRuntime(providers, audio), false
 }

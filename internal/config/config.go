@@ -1,6 +1,9 @@
 package config
 
-import "os"
+import (
+	"os"
+	"time"
+)
 
 type Config struct {
 	Environment      string
@@ -16,6 +19,8 @@ type Config struct {
 	CartesiaModelID  string
 	ElevenLabsKey    string
 	SmartTurnEnabled bool
+	TurnEnabled      bool
+	TurnStopDelay    time.Duration
 	RunSession       bool
 }
 
@@ -34,6 +39,8 @@ func Load() Config {
 		CartesiaModelID:  env("CARTESIA_MODEL_ID", "sonic-3.5"),
 		ElevenLabsKey:    os.Getenv("ELEVENLABS_API_KEY"),
 		SmartTurnEnabled: os.Getenv("SMART_TURN_ENABLED") == "true",
+		TurnEnabled:      os.Getenv("TURN_ENABLED") == "true",
+		TurnStopDelay:    durationEnv("TURN_STOP_DELAY", 700*time.Millisecond),
 		RunSession:       os.Getenv("RUN_SESSION") == "true",
 	}
 }
@@ -44,4 +51,17 @@ func env(key string, fallback string) string {
 		return fallback
 	}
 	return value
+}
+
+func durationEnv(key string, fallback time.Duration) time.Duration {
+	value := os.Getenv(key)
+	if value == "" {
+		return fallback
+	}
+
+	duration, err := time.ParseDuration(value)
+	if err != nil {
+		return fallback
+	}
+	return duration
 }

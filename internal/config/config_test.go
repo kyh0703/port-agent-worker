@@ -9,6 +9,8 @@ func TestLoadDefaults(t *testing.T) {
 	t.Setenv("OPENROUTER_MODEL", "")
 	t.Setenv("TTS_PROVIDER", "")
 	t.Setenv("CARTESIA_MODEL_ID", "")
+	t.Setenv("TURN_ENABLED", "")
+	t.Setenv("TURN_STOP_DELAY", "")
 
 	cfg := Load()
 
@@ -30,6 +32,12 @@ func TestLoadDefaults(t *testing.T) {
 	if cfg.CartesiaModelID != "sonic-3.5" {
 		t.Fatalf("CartesiaModelID = %q, want sonic-3.5", cfg.CartesiaModelID)
 	}
+	if cfg.TurnEnabled {
+		t.Fatal("TurnEnabled = true, want false")
+	}
+	if cfg.TurnStopDelay.String() != "700ms" {
+		t.Fatalf("TurnStopDelay = %s, want 700ms", cfg.TurnStopDelay)
+	}
 }
 
 func TestLoadProviderSecrets(t *testing.T) {
@@ -39,6 +47,8 @@ func TestLoadProviderSecrets(t *testing.T) {
 	t.Setenv("CARTESIA_VOICE_ID", "voice-id")
 	t.Setenv("SYSTEM_PROMPT", "be brief")
 	t.Setenv("SMART_TURN_ENABLED", "true")
+	t.Setenv("TURN_ENABLED", "true")
+	t.Setenv("TURN_STOP_DELAY", "2s")
 	t.Setenv("RUN_SESSION", "true")
 
 	cfg := Load()
@@ -60,6 +70,12 @@ func TestLoadProviderSecrets(t *testing.T) {
 	}
 	if !cfg.SmartTurnEnabled {
 		t.Fatal("SmartTurnEnabled = false, want true")
+	}
+	if !cfg.TurnEnabled {
+		t.Fatal("TurnEnabled = false, want true")
+	}
+	if cfg.TurnStopDelay.String() != "2s" {
+		t.Fatalf("TurnStopDelay = %s, want 2s", cfg.TurnStopDelay)
 	}
 	if !cfg.RunSession {
 		t.Fatal("RunSession = false, want true")
