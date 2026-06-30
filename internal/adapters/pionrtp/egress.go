@@ -20,7 +20,7 @@ const (
 type Egress struct {
 	track       *webrtc.TrackLocalStaticRTP
 	writer      rtpWriter
-	encoder     frameEncoder
+	encoder     FrameEncoder
 	payloadType uint8
 	ssrc        uint32
 	clockRate   uint32
@@ -33,7 +33,7 @@ func NewEgress(track *webrtc.TrackLocalStaticRTP) *Egress {
 	return NewEgressWithEncoder(track, nil)
 }
 
-func NewEgressWithEncoder(track *webrtc.TrackLocalStaticRTP, encoder frameEncoder) *Egress {
+func NewEgressWithEncoder(track *webrtc.TrackLocalStaticRTP, encoder FrameEncoder) *Egress {
 	egress := newEgress(trackWriter{track: track}, encoder, EgressConfig{})
 	egress.track = track
 	return egress
@@ -45,7 +45,7 @@ type EgressConfig struct {
 	ClockRate   uint32
 }
 
-func newEgress(writer rtpWriter, encoder frameEncoder, config EgressConfig) *Egress {
+func newEgress(writer rtpWriter, encoder FrameEncoder, config EgressConfig) *Egress {
 	if config.PayloadType == 0 {
 		config.PayloadType = defaultOpusPayloadType
 	}
@@ -131,7 +131,7 @@ func (w trackWriter) WriteRTP(ctx context.Context, packet *rtp.Packet) error {
 	return w.track.WriteRTP(packet)
 }
 
-type frameEncoder interface {
+type FrameEncoder interface {
 	Encode(frame voice.PCMFrame) ([]byte, error)
 }
 
