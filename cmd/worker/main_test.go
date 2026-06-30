@@ -2,15 +2,20 @@ package main
 
 import (
 	"context"
+	"errors"
 	"testing"
 
 	"port-agent-worker/internal/adapters/providers"
+	turnadapter "port-agent-worker/internal/adapters/turn"
 	"port-agent-worker/internal/config"
 	"port-agent-worker/internal/domain/voice"
 )
 
 func TestNewSessionRunnerUsesDefaultRunnerWhenTurnDisabled(t *testing.T) {
-	runner, turnEnabled := newSessionRunner(config.Config{}, fakeProviderRuntime())
+	runner, turnEnabled, err := newSessionRunner(config.Config{}, fakeProviderRuntime())
+	if err != nil {
+		t.Fatalf("newSessionRunner() error = %v", err)
+	}
 
 	if runner == nil {
 		t.Fatal("runner = nil")
@@ -21,13 +26,23 @@ func TestNewSessionRunnerUsesDefaultRunnerWhenTurnDisabled(t *testing.T) {
 }
 
 func TestNewSessionRunnerUsesTurnAwareRunnerWhenTurnEnabled(t *testing.T) {
-	runner, turnEnabled := newSessionRunner(config.Config{TurnEnabled: true}, fakeProviderRuntime())
+	runner, turnEnabled, err := newSessionRunner(config.Config{TurnEnabled: true, VADProvider: "noop"}, fakeProviderRuntime())
+	if err != nil {
+		t.Fatalf("newSessionRunner() error = %v", err)
+	}
 
 	if runner == nil {
 		t.Fatal("runner = nil")
 	}
 	if !turnEnabled {
 		t.Fatal("turnEnabled = false, want true")
+	}
+}
+
+func TestNewSessionRunnerReturnsTurnRuntimeError(t *testing.T) {
+	_, _, err := newSessionRunner(config.Config{TurnEnabled: true, VADProvider: "silero"}, fakeProviderRuntime())
+	if !errors.Is(err, turnadapter.ErrMissingSileroEngine) {
+		t.Fatalf("newSessionRunner() error = %v, want %v", err, turnadapter.ErrMissingSileroEngine)
 	}
 }
 

@@ -32,7 +32,11 @@ func main() {
 	}
 
 	log.Print("provider wiring ready")
-	runner, turnEnabled := newSessionRunner(cfg, runtime)
+	runner, turnEnabled, err := newSessionRunner(cfg, runtime)
+	if err != nil {
+		log.Printf("turn runtime wiring failed: %v", err)
+		os.Exit(1)
+	}
 	if turnEnabled {
 		log.Print("turn runtime wiring ready")
 	}
@@ -53,7 +57,7 @@ func main() {
 	log.Print("port-agent-worker stopped")
 }
 
-func newSessionRunner(cfg config.Config, providerRuntime providers.Runtime) (*session.Runner, bool) {
+func newSessionRunner(cfg config.Config, providerRuntime providers.Runtime) (*session.Runner, bool, error) {
 	providers := session.ProviderRuntime{
 		STT: providerRuntime.STT,
 		LLM: providerRuntime.LLM,
@@ -65,8 +69,12 @@ func newSessionRunner(cfg config.Config, providerRuntime providers.Runtime) (*se
 	}
 
 	if cfg.TurnEnabled {
-		return session.NewTurnAwareRunnerFromRuntime(providers, audio, turnadapter.NewRuntime(cfg)), true
+		turnRuntime, err := turnadapter.NewRuntime(cfg)
+		if err != nil {
+			return nil, false, err
+		}
+		return session.NewTurnAwareRunnerFromRuntime(providers, audio, turnRuntime), true, nil
 	}
 
-	return session.NewRunnerFromRuntime(providers, audio), false
+	return session.NewRunnerFromRuntime(providers, audio), false, nil
 }

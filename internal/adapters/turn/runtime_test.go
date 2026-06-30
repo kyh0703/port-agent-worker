@@ -2,21 +2,32 @@ package turnadapter
 
 import (
 	"context"
+	"errors"
 	"testing"
 	"time"
 
+	"port-agent-worker/internal/adapters/vad/noop"
+	"port-agent-worker/internal/adapters/vad/silero"
 	"port-agent-worker/internal/application/turn"
 	"port-agent-worker/internal/config"
+	"port-agent-worker/internal/domain/voice"
 )
 
 func TestNewRuntimeBuildsTurnRuntime(t *testing.T) {
-	runtime := NewRuntime(config.Config{
+	runtime, err := NewRuntime(config.Config{
 		SmartTurnEnabled: true,
 		TurnStopDelay:    time.Second,
+		VADProvider:      "noop",
 	})
+	if err != nil {
+		t.Fatalf("NewRuntime() error = %v", err)
+	}
 
 	if runtime.VAD == nil {
 		t.Fatal("VAD = nil")
+	}
+	if _, ok := runtime.VAD.(noop.Detector); !ok {
+		t.Fatalf("VAD type = %T, want noop.Detector", runtime.VAD)
 	}
 	if runtime.Processor == nil {
 		t.Fatal("Processor = nil")
@@ -26,6 +37,38 @@ func TestNewRuntimeBuildsTurnRuntime(t *testing.T) {
 	}
 	if runtime.TickInterval <= 0 {
 		t.Fatalf("TickInterval = %s, want positive duration", runtime.TickInterval)
+	}
+}
+
+func TestNewRuntimeRejectsUnknownVADProvider(t *testing.T) {
+	_, err := NewRuntime(config.Config{VADProvider: "unknown"})
+	if !errors.Is(err, ErrUnsupportedVADProvider) {
+		t.Fatalf("NewRuntime() error = %v, want %v", err, ErrUnsupportedVADProvider)
+	}
+}
+
+func TestNewRuntimeRequiresSileroEngine(t *testing.T) {
+	_, err := NewRuntime(config.Config{VADProvider: "silero"})
+	if !errors.Is(err, ErrMissingSileroEngine) {
+		t.Fatalf("NewRuntime() error = %v, want %v", err, ErrMissingSileroEngine)
+	}
+}
+
+func TestNewRuntimeWithOptionsBuildsSileroRuntime(t *testing.T) {
+	runtime, err := NewRuntimeWithOptions(
+		config.Config{
+			VADProvider:               "silero",
+			SileroVADThreshold:        0.7,
+			SileroVADMinSpeechFrames:  2,
+			SileroVADMinSilenceFrames: 4,
+		},
+		RuntimeOptions{SileroEngine: fixedSileroEngine{}},
+	)
+	if err != nil {
+		t.Fatalf("NewRuntimeWithOptions() error = %v", err)
+	}
+	if _, ok := runtime.VAD.(*silero.Detector); !ok {
+		t.Fatalf("VAD type = %T, want *silero.Detector", runtime.VAD)
 	}
 }
 
@@ -54,4 +97,10 @@ type recordingLogger struct {
 
 func (l *recordingLogger) Printf(string, ...any) {
 	l.calls++
+}
+
+type fixedSileroEngine struct{}
+
+func (fixedSileroEngine) SpeechProbability(context.Context, voice.PCMFrame) (float64, error) {
+	return 0, nil
 }

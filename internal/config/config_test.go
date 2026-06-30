@@ -9,6 +9,10 @@ func TestLoadDefaults(t *testing.T) {
 	t.Setenv("OPENROUTER_MODEL", "")
 	t.Setenv("TTS_PROVIDER", "")
 	t.Setenv("CARTESIA_MODEL_ID", "")
+	t.Setenv("VAD_PROVIDER", "")
+	t.Setenv("SILERO_VAD_THRESHOLD", "")
+	t.Setenv("SILERO_VAD_MIN_SPEECH_FRAMES", "")
+	t.Setenv("SILERO_VAD_MIN_SILENCE_FRAMES", "")
 	t.Setenv("TURN_ENABLED", "")
 	t.Setenv("TURN_STOP_DELAY", "")
 
@@ -32,6 +36,18 @@ func TestLoadDefaults(t *testing.T) {
 	if cfg.CartesiaModelID != "sonic-3.5" {
 		t.Fatalf("CartesiaModelID = %q, want sonic-3.5", cfg.CartesiaModelID)
 	}
+	if cfg.VADProvider != "noop" {
+		t.Fatalf("VADProvider = %q, want noop", cfg.VADProvider)
+	}
+	if cfg.SileroVADThreshold != 0.5 {
+		t.Fatalf("SileroVADThreshold = %f, want 0.5", cfg.SileroVADThreshold)
+	}
+	if cfg.SileroVADMinSpeechFrames != 1 {
+		t.Fatalf("SileroVADMinSpeechFrames = %d, want 1", cfg.SileroVADMinSpeechFrames)
+	}
+	if cfg.SileroVADMinSilenceFrames != 3 {
+		t.Fatalf("SileroVADMinSilenceFrames = %d, want 3", cfg.SileroVADMinSilenceFrames)
+	}
 	if cfg.TurnEnabled {
 		t.Fatal("TurnEnabled = true, want false")
 	}
@@ -47,6 +63,10 @@ func TestLoadProviderSecrets(t *testing.T) {
 	t.Setenv("CARTESIA_VOICE_ID", "voice-id")
 	t.Setenv("SYSTEM_PROMPT", "be brief")
 	t.Setenv("SMART_TURN_ENABLED", "true")
+	t.Setenv("VAD_PROVIDER", "silero")
+	t.Setenv("SILERO_VAD_THRESHOLD", "0.7")
+	t.Setenv("SILERO_VAD_MIN_SPEECH_FRAMES", "2")
+	t.Setenv("SILERO_VAD_MIN_SILENCE_FRAMES", "4")
 	t.Setenv("TURN_ENABLED", "true")
 	t.Setenv("TURN_STOP_DELAY", "2s")
 	t.Setenv("RUN_SESSION", "true")
@@ -70,6 +90,18 @@ func TestLoadProviderSecrets(t *testing.T) {
 	}
 	if !cfg.SmartTurnEnabled {
 		t.Fatal("SmartTurnEnabled = false, want true")
+	}
+	if cfg.VADProvider != "silero" {
+		t.Fatalf("VADProvider = %q, want silero", cfg.VADProvider)
+	}
+	if cfg.SileroVADThreshold != 0.7 {
+		t.Fatalf("SileroVADThreshold = %f, want 0.7", cfg.SileroVADThreshold)
+	}
+	if cfg.SileroVADMinSpeechFrames != 2 {
+		t.Fatalf("SileroVADMinSpeechFrames = %d, want 2", cfg.SileroVADMinSpeechFrames)
+	}
+	if cfg.SileroVADMinSilenceFrames != 4 {
+		t.Fatalf("SileroVADMinSilenceFrames = %d, want 4", cfg.SileroVADMinSilenceFrames)
 	}
 	if !cfg.TurnEnabled {
 		t.Fatal("TurnEnabled = false, want true")
