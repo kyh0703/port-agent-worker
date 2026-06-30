@@ -23,7 +23,7 @@ OpenRouter chat completions adapter를 추가해서 user utterance를 assistant 
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: OpenRouter adapter config와 chat completion request/response 모델을 구현한다.
 - Depends on:
   - none
@@ -38,7 +38,7 @@ OpenRouter chat completions adapter를 추가해서 user utterance를 assistant 
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: HTTP call, response parsing, error handling 테스트를 구현한다.
 - Depends on:
   - T1
@@ -52,7 +52,7 @@ OpenRouter chat completions adapter를 추가해서 user utterance를 assistant 
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: 전체 빌드 검증을 완료한다.
 - Depends on:
   - T1
@@ -65,4 +65,3 @@ OpenRouter chat completions adapter를 추가해서 user utterance를 assistant 
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
