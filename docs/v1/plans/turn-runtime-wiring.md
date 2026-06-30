@@ -23,7 +23,7 @@ worker entrypoint에서 turn-aware runner를 선택적으로 조립하고, Siler
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: noop VAD adapter와 테스트를 추가한다.
 - Depends on:
   - none
@@ -38,7 +38,7 @@ worker entrypoint에서 turn-aware runner를 선택적으로 조립하고, Siler
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: turn runtime factory와 logging decision handler를 추가한다.
 - Depends on:
   - T1
@@ -53,7 +53,7 @@ worker entrypoint에서 turn-aware runner를 선택적으로 조립하고, Siler
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: config와 `cmd/worker`에서 turn-aware runner 선택 wiring을 추가한다.
 - Depends on:
   - T2
@@ -70,7 +70,7 @@ worker entrypoint에서 turn-aware runner를 선택적으로 조립하고, Siler
 
 ### Task T4
 
-- [ ] Complete
+- [x] Complete
 - Goal: 전체 Go 검증과 build 검증을 완료한다.
 - Depends on:
   - T1
@@ -87,4 +87,3 @@ worker entrypoint에서 turn-aware runner를 선택적으로 조립하고, Siler
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
