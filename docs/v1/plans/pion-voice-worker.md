@@ -19,7 +19,7 @@ Pion RTP 기반 voice agent worker의 DDD + Hexagonal skeleton을 만들고, fak
 
 ### T1 Domain and Ports
 
-- [ ] Complete
+- [x] Complete
 - Goal: audio/session domain value와 application port를 정의한다.
 - Depends on: none
 - Write Scope: `internal/domain/**`, `internal/application/ports/**`
@@ -29,7 +29,7 @@ Pion RTP 기반 voice agent worker의 DDD + Hexagonal skeleton을 만들고, fak
 
 ### T2 Session Orchestrator
 
-- [ ] Complete
+- [x] Complete
 - Goal: ingress -> STT -> LLM -> TTS -> egress orchestration을 구현하고 fake 테스트를 작성한다.
 - Depends on: T1
 - Write Scope: `internal/application/session/**`
@@ -39,7 +39,7 @@ Pion RTP 기반 voice agent worker의 DDD + Hexagonal skeleton을 만들고, fak
 
 ### T3 Adapter Skeleton and Command Wiring
 
-- [ ] Complete
+- [x] Complete
 - Goal: Pion RTP adapter skeleton, noop provider, config, worker entrypoint를 구성한다.
 - Depends on: T1, T2
 - Write Scope: `internal/adapters/**`, `internal/config/**`, `cmd/worker/**`
@@ -49,11 +49,10 @@ Pion RTP 기반 voice agent worker의 DDD + Hexagonal skeleton을 만들고, fak
 
 ### T4 Project Tooling
 
-- [ ] Complete
+- [x] Complete
 - Goal: Makefile, README, module metadata를 정리한다.
 - Depends on: T3
 - Write Scope: `Makefile`, `README.md`, `go.mod`
 - Read Context: full tree
 - Checks: `make test`, `make build`
 - Parallel-safe: no
-
