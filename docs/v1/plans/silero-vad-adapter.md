@@ -24,7 +24,7 @@ Silero ONNX engine을 나중에 붙일 수 있는 VAD adapter skeleton과 speech
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: `internal/adapters/vad/silero`에 engine 기반 detector와 테스트를 추가한다.
 - Depends on:
   - none
@@ -40,7 +40,7 @@ Silero ONNX engine을 나중에 붙일 수 있는 VAD adapter skeleton과 speech
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: 전체 Go 검증과 build 검증을 완료한다.
 - Depends on:
   - T1
@@ -52,4 +52,3 @@ Silero ONNX engine을 나중에 붙일 수 있는 VAD adapter skeleton과 speech
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
