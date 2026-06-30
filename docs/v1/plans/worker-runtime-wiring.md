@@ -22,7 +22,7 @@
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: provider runtime config와 env loading 테스트를 추가한다.
 - Depends on:
   - none
@@ -36,7 +36,7 @@
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: config를 STT/LLM/TTS port 구현체로 변환하는 provider factory를 추가한다.
 - Depends on:
   - T1
@@ -51,7 +51,7 @@
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: `cmd/worker`에서 provider wiring을 실행하고 실패를 exit code로 처리한다.
 - Depends on:
   - T1
@@ -65,4 +65,3 @@
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
