@@ -22,7 +22,7 @@
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: TurnExecutor interface와 Runner type을 추가한다.
 - Depends on:
   - none
@@ -36,7 +36,7 @@
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: cancel, no-final-transcript, fatal error 동작 테스트를 추가한다.
 - Depends on:
   - T1
@@ -50,7 +50,7 @@
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: 전체 검증을 완료한다.
 - Depends on:
   - T1
@@ -63,4 +63,3 @@
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
