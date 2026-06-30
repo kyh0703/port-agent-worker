@@ -23,7 +23,7 @@ VAD speech activity event와 turn controller 연결 계약을 추가해 session/
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: `internal/domain/voice`에 speech activity event value와 validation을 추가한다.
 - Depends on:
   - none
@@ -37,7 +37,7 @@ VAD speech activity event와 turn controller 연결 계약을 추가해 session/
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: `internal/application/ports`에 VAD adapter port를 추가한다.
 - Depends on:
   - T1
@@ -51,7 +51,7 @@ VAD speech activity event와 turn controller 연결 계약을 추가해 session/
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: `internal/application/turn`에 speech activity event processor와 테스트를 추가한다.
 - Depends on:
   - T1
@@ -66,7 +66,7 @@ VAD speech activity event와 turn controller 연결 계약을 추가해 session/
 
 ### Task T4
 
-- [ ] Complete
+- [x] Complete
 - Goal: 전체 Go 검증과 build 검증을 완료한다.
 - Depends on:
   - T1
@@ -82,4 +82,3 @@ VAD speech activity event와 turn controller 연결 계약을 추가해 session/
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
