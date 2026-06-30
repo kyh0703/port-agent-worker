@@ -22,7 +22,7 @@ Pion audio track의 RTP packet을 PCM frame stream으로 변환하는 `AudioIngr
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: Pion packet source와 Opus decoder adapter boundary를 만든다.
 - Depends on:
   - none
@@ -38,7 +38,7 @@ Pion audio track의 RTP packet을 PCM frame stream으로 변환하는 `AudioIngr
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: `Ingress.PCMFrames` loop를 구현하고 fake 기반 테스트를 추가한다.
 - Depends on:
   - T1
@@ -52,7 +52,7 @@ Pion audio track의 RTP packet을 PCM frame stream으로 변환하는 `AudioIngr
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: dependency 정리와 전체 검증을 완료한다.
 - Depends on:
   - T1
@@ -67,4 +67,3 @@ Pion audio track의 RTP packet을 PCM frame stream으로 변환하는 `AudioIngr
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
