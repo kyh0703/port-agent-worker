@@ -22,7 +22,7 @@ Pion tracks와 provider runtime을 session runner로 조립하는 adapter-level 
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: `media/pion`에 provider runtime + Pion track config를 runner로 조립하는 binder를 추가한다.
 - Depends on:
   - none
@@ -37,7 +37,7 @@ Pion tracks와 provider runtime을 session runner로 조립하는 adapter-level 
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: fake provider/encoder 기반 테스트와 전체 검증을 완료한다.
 - Depends on:
   - T1
@@ -49,4 +49,3 @@ Pion tracks와 provider runtime을 session runner로 조립하는 adapter-level 
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
