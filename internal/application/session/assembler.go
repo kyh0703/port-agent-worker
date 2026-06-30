@@ -25,3 +25,15 @@ func NewRunnerFromRuntime(providers ProviderRuntime, audio AudioRuntime) *Runner
 	)
 	return NewRunner(orchestrator)
 }
+
+func NewTurnAwareRunnerFromRuntime(providers ProviderRuntime, audio AudioRuntime, turnRuntime TurnRuntime) *Runner {
+	orchestrator := NewTurnAwareOrchestrator(
+		audio.Ingress,
+		audio.Egress,
+		providers.STT,
+		providers.LLM,
+		providers.TTS,
+		turnRuntime,
+	)
+	return NewRunner(orchestrator)
+}
