@@ -24,7 +24,7 @@
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: config에 VAD provider와 Silero VAD 설정을 추가한다.
 - Depends on:
   - none
@@ -39,7 +39,7 @@
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: turn runtime factory가 noop/silero provider 선택과 error handling을 수행하게 한다.
 - Depends on:
   - T1
@@ -55,7 +55,7 @@
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: worker entrypoint가 turn runtime wiring error를 처리하게 한다.
 - Depends on:
   - T2
@@ -70,7 +70,7 @@
 
 ### Task T4
 
-- [ ] Complete
+- [x] Complete
 - Goal: 전체 Go 검증과 build 검증을 완료한다.
 - Depends on:
   - T1
@@ -86,4 +86,3 @@
   - `go test ./...`
   - `make build`
 - Parallel-safe: no
-
