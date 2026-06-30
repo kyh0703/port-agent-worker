@@ -22,7 +22,7 @@ Fix turn-aware audio fan-out blocking behavior and clean provider wiring so adap
 
 ### Task T1
 
-- [ ] Complete
+- [x] Complete
 - Goal: Reproduce and fix turn-aware fan-out so a stopped VAD consumer cannot block STT input completion.
 - Depends on:
   - none
@@ -38,7 +38,7 @@ Fix turn-aware audio fan-out blocking behavior and clean provider wiring so adap
 
 ### Task T2
 
-- [ ] Complete
+- [x] Complete
 - Goal: Refactor provider runtime construction so `internal/adapters/providers` does not import `internal/config`.
 - Depends on:
   - T1
@@ -59,7 +59,7 @@ Fix turn-aware audio fan-out blocking behavior and clean provider wiring so adap
 
 ### Task T3
 
-- [ ] Complete
+- [x] Complete
 - Goal: Run full verification for the stability and wiring cleanup slice.
 - Depends on:
   - T1
