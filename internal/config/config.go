@@ -16,6 +16,7 @@ type Config struct {
 	CartesiaModelID  string
 	ElevenLabsKey    string
 	SmartTurnEnabled bool
+	RunSession       bool
 }
 
 func Load() Config {
@@ -33,6 +34,7 @@ func Load() Config {
 		CartesiaModelID:  env("CARTESIA_MODEL_ID", "sonic-3.5"),
 		ElevenLabsKey:    os.Getenv("ELEVENLABS_API_KEY"),
 		SmartTurnEnabled: os.Getenv("SMART_TURN_ENABLED") == "true",
+		RunSession:       os.Getenv("RUN_SESSION") == "true",
 	}
 }
 

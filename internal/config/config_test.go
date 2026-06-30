@@ -39,6 +39,7 @@ func TestLoadProviderSecrets(t *testing.T) {
 	t.Setenv("CARTESIA_VOICE_ID", "voice-id")
 	t.Setenv("SYSTEM_PROMPT", "be brief")
 	t.Setenv("SMART_TURN_ENABLED", "true")
+	t.Setenv("RUN_SESSION", "true")
 
 	cfg := Load()
 
@@ -59,5 +60,8 @@ func TestLoadProviderSecrets(t *testing.T) {
 	}
 	if !cfg.SmartTurnEnabled {
 		t.Fatal("SmartTurnEnabled = false, want true")
+	}
+	if !cfg.RunSession {
+		t.Fatal("RunSession = false, want true")
 	}
 }

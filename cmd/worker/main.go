@@ -7,7 +7,9 @@ import (
 	"os/signal"
 	"syscall"
 
+	"port-agent-worker/internal/adapters/media/pending"
 	"port-agent-worker/internal/adapters/providers"
+	"port-agent-worker/internal/application/session"
 	"port-agent-worker/internal/config"
 )
 
@@ -29,7 +31,29 @@ func main() {
 	}
 
 	log.Print("provider wiring ready")
-	log.Print("pion track wiring is pending")
+	runner := session.NewRunnerFromRuntime(
+		session.ProviderRuntime{
+			STT: runtime.STT,
+			LLM: runtime.LLM,
+			TTS: runtime.TTS,
+		},
+		session.AudioRuntime{
+			Ingress: pending.Ingress{},
+			Egress:  pending.Egress{},
+		},
+	)
+
+	if cfg.RunSession {
+		log.Print("session runner starting")
+		if err := runner.Run(ctx); err != nil {
+			log.Printf("session runner stopped: %v", err)
+			os.Exit(1)
+		}
+		return
+	}
+
+	log.Print("session runner ready")
+	log.Print("media wiring is pending; set RUN_SESSION=true after Pion tracks are configured")
 
 	<-ctx.Done()
 	log.Print("port-agent-worker stopped")
