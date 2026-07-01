@@ -3,7 +3,7 @@ package ports
 import (
 	"context"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 type AudioIngress interface {

@@ -3,7 +3,7 @@ package session
 import (
 	"testing"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestNewRunnerFromRuntimeBuildsRunner(t *testing.T) {

@@ -12,8 +12,8 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	"port-agent-worker/internal/application/ports"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/application/ports"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 const defaultBaseURL = "wss://api.deepgram.com/v1/listen"

@@ -1,7 +1,7 @@
 package session
 
 import (
-	"port-agent-worker/internal/application/ports"
+	"port-voice-pipeline/internal/application/ports"
 )
 
 type ProviderRuntime struct {

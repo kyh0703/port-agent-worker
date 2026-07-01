@@ -1,4 +1,4 @@
-APP := port-agent-worker
+APP := port-voice-pipeline
 
 .PHONY: test build tidy
 

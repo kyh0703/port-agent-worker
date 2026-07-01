@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestActivityProcessorReturnsBargeInForSpeechStartedDuringBotSpeech(t *testing.T) {

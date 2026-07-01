@@ -3,7 +3,7 @@ package noop
 import (
 	"context"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 type Detector struct{}

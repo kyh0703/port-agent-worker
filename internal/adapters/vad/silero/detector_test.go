@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"port-agent-worker/internal/application/ports"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/application/ports"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestNewRejectsMissingEngine(t *testing.T) {

@@ -6,7 +6,7 @@ import (
 
 	"github.com/pion/webrtc/v4"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestNewRuntimeRequiresTracks(t *testing.T) {

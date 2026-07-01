@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 var ErrMediaNotConfigured = errors.New("media is not configured")

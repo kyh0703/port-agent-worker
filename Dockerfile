@@ -14,12 +14,12 @@ COPY . .
 ARG TARGETOS=linux
 ARG TARGETARCH=amd64
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
-    go build -trimpath -ldflags="-s -w" -o /out/port-agent-worker ./cmd/worker
+    go build -trimpath -ldflags="-s -w" -o /out/port-voice-pipeline ./cmd/worker
 
 FROM scratch
 
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=build /out/port-agent-worker /port-agent-worker
+COPY --from=build /out/port-voice-pipeline /port-voice-pipeline
 
 USER 65532:65532
-ENTRYPOINT ["/port-agent-worker"]
+ENTRYPOINT ["/port-voice-pipeline"]

@@ -6,8 +6,8 @@ import (
 
 	"github.com/pion/webrtc/v4"
 
-	"port-agent-worker/internal/adapters/pionrtp"
-	"port-agent-worker/internal/application/session"
+	"port-voice-pipeline/internal/adapters/pionrtp"
+	"port-voice-pipeline/internal/application/session"
 )
 
 var ErrMissingTrack = errors.New("pion media track is required")

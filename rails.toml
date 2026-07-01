@@ -4,7 +4,7 @@
 
 [build]
 builder = "RAILPACK"
-buildCommand = "go build -o bin/port-agent-worker ./cmd/worker"
+buildCommand = "go build -o bin/port-voice-pipeline ./cmd/worker"
 watchPatterns = [
   "cmd/**",
   "internal/**",
@@ -15,6 +15,6 @@ watchPatterns = [
 ]
 
 [deploy]
-startCommand = "./bin/port-agent-worker"
+startCommand = "./bin/port-voice-pipeline"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10

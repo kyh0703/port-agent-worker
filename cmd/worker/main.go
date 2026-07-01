@@ -7,14 +7,14 @@ import (
 	"os/signal"
 	"syscall"
 
-	"port-agent-worker/internal/adapters/media/pending"
-	"port-agent-worker/internal/adapters/providers"
-	"port-agent-worker/internal/adapters/providers/cartesia"
-	"port-agent-worker/internal/adapters/providers/deepgram"
-	"port-agent-worker/internal/adapters/providers/openrouter"
-	turnadapter "port-agent-worker/internal/adapters/turn"
-	"port-agent-worker/internal/application/session"
-	"port-agent-worker/internal/config"
+	"port-voice-pipeline/internal/adapters/media/pending"
+	"port-voice-pipeline/internal/adapters/providers"
+	"port-voice-pipeline/internal/adapters/providers/cartesia"
+	"port-voice-pipeline/internal/adapters/providers/deepgram"
+	"port-voice-pipeline/internal/adapters/providers/openrouter"
+	turnadapter "port-voice-pipeline/internal/adapters/turn"
+	"port-voice-pipeline/internal/application/session"
+	"port-voice-pipeline/internal/config"
 )
 
 func main() {
@@ -22,7 +22,7 @@ func main() {
 	defer stop()
 
 	cfg := config.Load()
-	log.Printf("port-agent-worker starting env=%s tts_provider=%s smart_turn_enabled=%t", cfg.Environment, cfg.TTSProvider, cfg.SmartTurnEnabled)
+	log.Printf("port-voice-pipeline starting env=%s tts_provider=%s smart_turn_enabled=%t", cfg.Environment, cfg.TTSProvider, cfg.SmartTurnEnabled)
 
 	runtime, err := newProviderRuntime(cfg)
 	if err != nil {
@@ -57,7 +57,7 @@ func main() {
 	log.Print("media wiring is pending; set RUN_SESSION=true after Pion tracks are configured")
 
 	<-ctx.Done()
-	log.Print("port-agent-worker stopped")
+	log.Print("port-voice-pipeline stopped")
 }
 
 func newProviderRuntime(cfg config.Config) (providers.Runtime, error) {
@@ -73,7 +73,7 @@ func newProviderRuntime(cfg config.Config) (providers.Runtime, error) {
 			APIKey:       cfg.OpenRouterKey,
 			Model:        cfg.OpenRouterModel,
 			SystemPrompt: cfg.SystemPrompt,
-			AppTitle:     "port-agent-worker",
+			AppTitle:     "port-voice-pipeline",
 		},
 		Cartesia: cartesia.Config{
 			APIKey:  cfg.CartesiaAPIKey,
