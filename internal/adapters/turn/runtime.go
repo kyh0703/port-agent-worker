@@ -8,12 +8,12 @@ import (
 	"strings"
 	"time"
 
-	"port-agent-worker/internal/adapters/vad/noop"
-	"port-agent-worker/internal/adapters/vad/silero"
-	"port-agent-worker/internal/application/ports"
-	"port-agent-worker/internal/application/session"
-	applicationturn "port-agent-worker/internal/application/turn"
-	"port-agent-worker/internal/config"
+	"port-voice-pipeline/internal/adapters/vad/noop"
+	"port-voice-pipeline/internal/adapters/vad/silero"
+	"port-voice-pipeline/internal/application/ports"
+	"port-voice-pipeline/internal/application/session"
+	applicationturn "port-voice-pipeline/internal/application/turn"
+	"port-voice-pipeline/internal/config"
 )
 
 const defaultTickInterval = 50 * time.Millisecond

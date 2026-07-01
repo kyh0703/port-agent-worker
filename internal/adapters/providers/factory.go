@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"strings"
 
-	"port-agent-worker/internal/adapters/providers/cartesia"
-	"port-agent-worker/internal/adapters/providers/deepgram"
-	"port-agent-worker/internal/adapters/providers/openrouter"
-	"port-agent-worker/internal/application/ports"
+	"port-voice-pipeline/internal/adapters/providers/cartesia"
+	"port-voice-pipeline/internal/adapters/providers/deepgram"
+	"port-voice-pipeline/internal/adapters/providers/openrouter"
+	"port-voice-pipeline/internal/application/ports"
 )
 
 var ErrUnsupportedTTSProvider = errors.New("unsupported tts provider")

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"port-agent-worker/internal/application/ports"
-	"port-agent-worker/internal/application/turn"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/application/ports"
+	"port-voice-pipeline/internal/application/turn"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 const defaultTurnTickInterval = 50 * time.Millisecond

@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestSynthesizeRequiresConfig(t *testing.T) {

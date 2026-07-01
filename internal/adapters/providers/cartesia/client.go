@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"port-agent-worker/internal/application/ports"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/application/ports"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 const defaultBaseURL = "https://api.cartesia.ai/tts/bytes"

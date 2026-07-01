@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"port-agent-worker/internal/application/ports"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/application/ports"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 var ErrNoFinalTranscript = errors.New("no final transcript")

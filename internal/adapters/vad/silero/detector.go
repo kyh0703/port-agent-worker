@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 const (

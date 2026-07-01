@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestGenerateRequiresConfig(t *testing.T) {
@@ -56,7 +56,7 @@ func TestGeneratePostsChatCompletionAndParsesResponse(t *testing.T) {
 		APIKey:       "test-key",
 		BaseURL:      server.URL,
 		SystemPrompt: "be concise",
-		AppTitle:     "port-agent-worker",
+		AppTitle:     "port-voice-pipeline",
 		SiteURL:      "https://example.test",
 		HTTPClient:   server.Client(),
 	})
@@ -76,7 +76,7 @@ func TestGeneratePostsChatCompletionAndParsesResponse(t *testing.T) {
 	if request.referer != "https://example.test" {
 		t.Fatalf("HTTP-Referer = %q", request.referer)
 	}
-	if request.title != "port-agent-worker" {
+	if request.title != "port-voice-pipeline" {
 		t.Fatalf("X-Title = %q", request.title)
 	}
 	if request.body.Model != "google/gemini-2.5-flash-lite" {

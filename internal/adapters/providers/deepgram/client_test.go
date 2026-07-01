@@ -10,7 +10,7 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestListenURLUsesNova3PCMDefaults(t *testing.T) {

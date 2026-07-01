@@ -1,4 +1,4 @@
-module port-agent-worker
+module port-voice-pipeline
 
 go 1.26
 

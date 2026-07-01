@@ -1,6 +1,6 @@
-# port-agent-worker
+# port-voice-pipeline
 
-Pion SFU 기반 RTP audio track을 받아 STT -> LLM -> TTS 흐름을 실행하는 voice agent worker입니다.
+Pion SFU 기반 RTP audio track을 받아 STT -> LLM -> TTS 흐름을 실행하는 voice pipeline runtime입니다.
 
 ## Architecture
 

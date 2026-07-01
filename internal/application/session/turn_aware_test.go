@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"port-agent-worker/internal/application/ports"
-	"port-agent-worker/internal/application/turn"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/application/ports"
+	"port-voice-pipeline/internal/application/turn"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestNewTurnAwareRunnerFromRuntimeBuildsRunner(t *testing.T) {

@@ -5,10 +5,10 @@ import (
 	"errors"
 	"testing"
 
-	"port-agent-worker/internal/adapters/providers"
-	turnadapter "port-agent-worker/internal/adapters/turn"
-	"port-agent-worker/internal/config"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/adapters/providers"
+	turnadapter "port-voice-pipeline/internal/adapters/turn"
+	"port-voice-pipeline/internal/config"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestNewSessionRunnerUsesDefaultRunnerWhenTurnDisabled(t *testing.T) {

@@ -1,7 +1,7 @@
 package pion
 
 import (
-	"port-agent-worker/internal/application/session"
+	"port-voice-pipeline/internal/application/session"
 )
 
 func NewRunner(config Config, providers session.ProviderRuntime) (*session.Runner, error) {

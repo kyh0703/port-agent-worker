@@ -8,7 +8,7 @@ import (
 
 	"github.com/pion/rtp"
 
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestEgressRequiresTrack(t *testing.T) {

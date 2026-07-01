@@ -4,9 +4,9 @@ import (
 	"errors"
 	"testing"
 
-	"port-agent-worker/internal/adapters/providers/cartesia"
-	"port-agent-worker/internal/adapters/providers/deepgram"
-	"port-agent-worker/internal/adapters/providers/openrouter"
+	"port-voice-pipeline/internal/adapters/providers/cartesia"
+	"port-voice-pipeline/internal/adapters/providers/deepgram"
+	"port-voice-pipeline/internal/adapters/providers/openrouter"
 )
 
 func TestNewRuntimeBuildsProviders(t *testing.T) {

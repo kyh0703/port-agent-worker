@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	"port-agent-worker/internal/adapters/vad/noop"
-	"port-agent-worker/internal/adapters/vad/silero"
-	"port-agent-worker/internal/application/turn"
-	"port-agent-worker/internal/config"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/adapters/vad/noop"
+	"port-voice-pipeline/internal/adapters/vad/silero"
+	"port-voice-pipeline/internal/application/turn"
+	"port-voice-pipeline/internal/config"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestNewRuntimeBuildsTurnRuntime(t *testing.T) {

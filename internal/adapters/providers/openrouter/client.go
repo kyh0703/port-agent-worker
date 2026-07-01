@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"strings"
 
-	"port-agent-worker/internal/application/ports"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/application/ports"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 const defaultBaseURL = "https://openrouter.ai/api/v1/chat/completions"

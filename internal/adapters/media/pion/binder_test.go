@@ -8,9 +8,9 @@ import (
 
 	"github.com/pion/webrtc/v4"
 
-	"port-agent-worker/internal/application/session"
-	"port-agent-worker/internal/application/turn"
-	"port-agent-worker/internal/domain/voice"
+	"port-voice-pipeline/internal/application/session"
+	"port-voice-pipeline/internal/application/turn"
+	"port-voice-pipeline/internal/domain/voice"
 )
 
 func TestNewRunnerRequiresMediaRuntime(t *testing.T) {
