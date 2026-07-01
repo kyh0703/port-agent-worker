@@ -12,7 +12,7 @@ current_version: v2
 
 ### v1
 
-- Pion RTP 기반 voice agent worker MVP skeleton을 DDD + Hexagonal 경계로 구성했다.
+- Pion RTP 기반 voice pipeline runtime MVP skeleton을 DDD + Hexagonal 경계로 구성했다.
 - `internal/domain/voice`에 PCM frame, transcript, assistant response, speech activity event value를 정의했다.
 - `internal/application/ports`에 audio ingress/egress, STT, LLM, TTS, VAD 포트를 분리했다.
 - `internal/application/session`에 STT -> LLM -> TTS -> audio egress orchestration, 반복 실행 runner, turn-aware orchestration을 추가했다.

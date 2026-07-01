@@ -2,7 +2,7 @@
 
 ## Goal
 
-Add a tag-triggered GitHub Actions workflow that builds the worker container image and pushes it to GHCR.
+Add a tag-triggered GitHub Actions workflow that builds the voice pipeline container image and pushes it to GHCR.
 
 ## References
 
@@ -36,7 +36,7 @@ Add a tag-triggered GitHub Actions workflow that builds the worker container ima
   - `docs/v2/designs/2026-06-30-v2-tag-release-image.md`
 - Checks:
   - `make build`
-  - `docker build -t port-agent-worker:ci .` when Docker is available
+  - `docker build -t port-voice-pipeline:ci .` when Docker is available
 - Parallel-safe: no
 
 ### Task T2
@@ -70,5 +70,5 @@ Add a tag-triggered GitHub Actions workflow that builds the worker container ima
 - Checks:
   - `go test ./...`
   - `make build`
-  - `docker build -t port-agent-worker:ci .` when Docker is available
+  - `docker build -t port-voice-pipeline:ci .` when Docker is available
 - Parallel-safe: no

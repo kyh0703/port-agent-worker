@@ -16,8 +16,8 @@ GitHub tag push 시 worker Docker image를 빌드하고 GitHub Container Registr
   - `docs/ROADMAP.md`
   - `docs/ARCHITECTURE.md`
 - Existing system facts:
-  - Go worker entrypoint is `./cmd/worker`.
-  - Current build command is `go build -o bin/port-agent-worker ./cmd/worker`.
+  - Go voice pipeline entrypoint is `./cmd/worker`.
+  - Current build command is `go build -o bin/port-voice-pipeline ./cmd/worker`.
   - No Dockerfile or GitHub Actions workflow exists yet.
   - Deployment config exists in `rails.toml`.
 - User brief:
@@ -27,7 +27,7 @@ GitHub tag push 시 worker Docker image를 빌드하고 GitHub Container Registr
 
 ### Scope for Planning
 
-- Add a Dockerfile for the Go worker image.
+- Add a Dockerfile for the Go voice pipeline image.
 - Add a GitHub Actions workflow that runs on semantic version tag pushes and pushes image tags to GHCR.
 - Use repository-local build/test checks before pushing the image.
 
@@ -35,7 +35,7 @@ GitHub tag push 시 worker Docker image를 빌드하고 GitHub Container Registr
 
 - Pushing a tag like `v1.2.3` triggers the workflow.
 - Workflow authenticates to `ghcr.io` using `GITHUB_TOKEN`.
-- Workflow builds the worker image and pushes it to `ghcr.io/<owner>/<repo>`.
+- Workflow builds the voice pipeline image and pushes it to `ghcr.io/<owner>/port-voice-pipeline`.
 - Workflow publishes tag-derived image tags and labels.
 - Local verification confirms workflow YAML and Dockerfile are syntactically usable.
 
@@ -54,7 +54,7 @@ GitHub tag push 시 worker Docker image를 빌드하고 GitHub Container Registr
 
 - `go test ./...`
 - `make build`
-- `docker build -t port-agent-worker:ci .` when Docker is available
+- `docker build -t port-voice-pipeline:ci .` when Docker is available
 - YAML parse check for `.github/workflows/release-image.yml`
 
 ### Parallelization Hints
